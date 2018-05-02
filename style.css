@@ -1,0 +1,23 @@
+	.lb{
+		width:150px; 
+		height:20px;
+	}
+
+	div{
+		color: white;
+	}
+
+	h1{
+		color: white;
+	}
+
+	body{
+
+		background-image: url("bgacademia.jpg");
+		background-size: 100%;
+	}
+
+	p{
+		color: white;
+		font-size: 20px;
+	}

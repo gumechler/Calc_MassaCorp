@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Calculadora de Massa Corporal</title>
+	<link rel="stylesheet" type="text/css" href="style.css"/>
+	<link rel="shortcut icon" href="acad.ico" type="image/x-icon"/>
+	<script type="text/javascript" src="jquery.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('#formularioMasc').hide();
+			$('#formularioFeminino').hide();
+		})
+
+		function mostraMasculino(){
+
+			$(document).ready(function(){
+
+			$('#formularioMasc').show();
+			$('#formularioFeminino').hide();
+		})
+		}
+
+		function mostraFeminino(){
+
+			$(document).ready(function(){
+
+			$('#formularioMasc').hide();
+			$('#formularioFeminino').show();
+		})
+		}
+
+		function fechaCalc(){
+			$(document).ready(function(){
+
+			$('#formularioMasc').hide();
+			$('#formularioFeminino').hide();
+		})	
+		}
+
+
+		function calcMasc(){
+
+			 	var pesoM   = parseFloat(document.getElementById("pesoM").value);
+			    var x3  = document.getElementById("idadeM").value ;
+			    var peito   = parseFloat(document.getElementById("peitoM").value);
+			    var abdomen = parseFloat(document.getElementById("abdomen").value);
+			    var coxaM   = parseFloat(document.getElementById("coxaM").value);
+
+			   /* if (pesoM < 45 && pesoM > 150) {
+			    	window.alert('Insira um peso correto!');
+			    	return false;
+			    }else {
+			    	return true;
+			    }*/
+
+			    var x1          = (peito) / 100 + (abdomen) / 100 + (coxaM) / 100;
+			    var densM       = 1.10938 - 0.0008267 * (x1) + ((0.0000016 * (x1)) * (0.0000016 * (x1))) - 0.0002574 * (x3);
+			    var gorduraM    = ((4.95 / densM - 4.50) * 100 ).toFixed(2);
+			    var gorduraAbsM = (pesoM * gorduraM) / 100;
+			    var massaMaM    = pesoM - gorduraAbsM;
+			    var massaCorpIM = (massaMaM / 0.85 ).toFixed(2) ;
+			    var massaCorpEM = (massaMaM - massaCorpIM).toFixed(2);
+
+			    document.getElementById("calM").innerHTML = "Gordura Percentual: " + gorduraM + " %<br><br>" + "Gordura Absoluta: " + gorduraAbsM + " Kg<br><br>" + "Massa Magra: " + massaMaM + " Kg<br><br>" + "Massa Corporal: " + massaCorpIM + " Kg<br><br>" + "Massa Excesso: " + massaCorpEM + " Kg";
+		}
+
+		function calcFem(){
+
+				var pesoF   = document.getElementById("pesoF").value ;
+			    var x3  = document.getElementById("idadeF").value ;
+			    var triceps = document.getElementById("triceps").value ;
+			    var supra   = document.getElementById("supra").value ;
+			    var coxaF   = document.getElementById("coxaF").value ;
+
+			    var x2          =  triceps +  supra  +  coxaF  ;
+			    var densF       = 1.099421 - 0.0009929 * (x2) + ((0.0000023 * (x2)) * (0.0000023 * (x2))) - 0.0001392 * (x3) ;
+			    var gorduraF    = ( ((4.95 / densF) - 4.50) * 100 ).toFixed(2) ;
+			    var gorduraAbsF = (pesoF * gorduraF) / 100 ;
+			    var massaMaF    = pesoF - gorduraAbsF ;
+			    var massaCorpIF = (massaMaF / 0.75 ).toFixed(2) ;
+			    var massaCorpEF = (massaMaF - massaCorpIF ).toFixed(2) ;
+
+			    document.getElementById("calF").innerHTML = "Gordura Percentual: " + gorduraF + " %<br><br>" + "Gordura Absoluta: " + gorduraAbsF + " Kg<br><br>" + "Massa Magra: " + massaMaF + " Kg<br><br>" + "Massa Corporal: " + massaCorpIF + " Kg<br><br>" + "Massa Excesso: " + massaCorpEF + " Kg";
+		}
+
+	</script>
+
+	
+</head>
+<body>
+
+	<center><h1>Calculadora de Massa Corporal</h1></center><br><br>
+
+	<center><div id="formularioInicial">
+
+		<form id="form1">
+		
+		<h2>Informe os Dados:</h2><br>
+
+		Nome:
+		<input class="lb" type="text" name="nome" required maxlength="30" placeholder="Nome aqui...">
+		<input type="button" value="Fechar Calculadora" id="btnFech" onclick="fechaCalc()"><br><br>
+
+		<input type="button" value="Masculino" id="btnM" onclick="mostraMasculino()">
+		<input type="button" value="Feminino" id="btnF" onclick="mostraFeminino()">
+		</form>
+		</div></center>
+		
+
+		<center><div id="formularioMasc">
+			<br><h2>Masculino</h2>
+			<form id="formMasc">	
+
+			Peso:
+			<input class="lb" id="pesoM" type="number" min="45" max="150" placeholder="45 - 150"><br><br>
+			Idade:
+			<input class="lb" id="idadeM" type="number" min="18" max="61" placeholder="18 - 61"><br><br>
+			Peitoral:
+			<input class="lb" type="number" id="peitoM" min="0" max="100"><br><br>
+			Abdominal:
+			<input class="lb"  type="number" id="abdomen" min="0" max="100"><br><br>
+			Coxa:
+			<input class="lb" type="number" id="coxaM" min="0" max="100"><br><br>
+
+			<input type="button" value="Calcular" onclick="calcMasc()">
+
+
+			</form>
+		<p id="calM"></p>
+		</div></center>
+
+
+
+		<center><div id="formularioFeminino">
+			<br><h2>Feminino</h2>
+			<form id="formFem">	
+
+			Peso:
+			<input class="lb" type="number" id="pesoF" min="45" max="150" placeholder="45 - 150"><br><br>
+			Idade:
+			<input class="lb" type="number" id="idadeF" min="18" max="55" placeholder="18 - 55"><br><br>
+			Tríceps:
+	        <input class="lb" type="number" id="triceps" min="0" max="100"><br><br>
+	        Supra-ilíaca:
+	        <input class="lb" type="number" id="supra" min="0" max="100"><br><br>
+	        Coxa:
+	        <input  class="lb" type="number" id="coxaF" min="0" max="100"><br><br>
+
+	        <input type="button" value="Calcular" onclick="calcFem()">
+
+			</form>
+		<p id="calF">
+		</div></center>
+</body>
+</html>
